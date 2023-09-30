@@ -1,0 +1,69 @@
+/****************************************************************************
+**
+** Copyright (C) 2021 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of the Qt Design Studio documentation.
+**
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU Free Documentation License Usage
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of
+** this file. Please review the following information to ensure
+** the GNU Free Documentation License version 1.3 requirements
+** will be met: https://www.gnu.org/licenses/fdl-1.3.html.
+**
+****************************************************************************/
+
+/*!
+    \previouspage studio-terms.html
+    \group studioexamples
+    \nextpage quick-uis.html
+    \title Examples and Tutorials
+
+    In the \uicontrol Welcome mode, you can open examples and tutorials that
+    illustrate how to use \QDS. Some examples are delivered together with
+    \QDS and have been documented, while you can download and install others
+    for previewing them on the desktop.
+
+    \section1 Video Tutorials
+
+    The \uicontrol Tutorials tab contains links to video tutorials that provide
+    more information about \QDS. To watch a tutorial on YouTube, select it in
+    the tab.
+
+    \include qtbridge-tutorial-links.qdocinc qtsketchbridge tutorials
+
+    \section1 Examples for Downloading
+
+    The \uicontrol Examples tab lists complex example applications for
+    downloading that demonstrate what you can accomplish with \QDS.
+
+    \image studio-examples-download.png "Examples for download in Welcome mode"
+
+    To download the examples and open them in \QDS:
+
+    \list 1
+        \li Select an example.
+        \li Select \uicontrol {Start Download} to download the example source
+            files.
+        \li Select the folder where the source files will be installed.
+        \li Select \uicontrol Continue to install the files.
+        \li Select \uicontrol Open to open the example in \QDS.
+        \li Select the \inlineimage live_preview.png
+            (\uicontrol {Show Live Preview}) button to preview the example.
+    \endlist
+
+    \section1 Documented Examples
+
+    The \uicontrol Examples tab lists documented examples of using \QDS. To
+    open an example in \QDS, select it in the tab.
+*/

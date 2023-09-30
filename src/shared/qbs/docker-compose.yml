@@ -1,0 +1,118 @@
+version: "3.7"
+
+x-default-service: &linux
+  working_dir: /qbs
+  environment:
+    - BUILD_OPTIONS
+    - QTEST_FUNCTION_TIMEOUT
+    - QBS_AUTOTEST_PROFILE
+    - QBS_TEST_SOURCE_ROOT
+    - WITH_ARCHIVE
+    - WITH_TESTS
+    - CLCACHE_DIR
+  volumes:
+    - .:/qbs
+    - ~/.ccache:/home/devel/.ccache
+  network_mode: bridge
+  cap_add:
+      - SYS_PTRACE
+
+services:
+  focal:
+    << : *linux
+    hostname: focal
+    image: ${DOCKER_USER:-qbsbuild}/qbsdev:focal-5.15.2_1.18.2-0
+    build:
+      dockerfile: docker/focal/Dockerfile
+      context: .
+      args:
+        QT_VERSION: 5.15.2
+        QTCREATOR_VERSION: 4.14.2
+
+  focal-qt6:
+    << : *linux
+    hostname: focal-qt6
+    image: ${DOCKER_USER:-qbsbuild}/qbsdev:focal-qt6-6.1.2_1.19.2-0
+    build:
+      dockerfile: docker/focal/Dockerfile
+      context: .
+      args:
+        QT_VERSION: 6.1.2
+        QTCREATOR_VERSION: 4.15.2
+
+  focal-android-513:
+    << : *linux
+    hostname: focal-android
+    image: ${DOCKER_USER:-qbsbuild}/qbsdev:focal-android-5.13.2-2
+    build:
+      dockerfile: docker/focal/test-android.Dockerfile
+      context: .
+      args:
+        QT_VERSION: 5.13.2
+
+  focal-android-514:
+    << : *linux
+    hostname: focal-android
+    image: ${DOCKER_USER:-qbsbuild}/qbsdev:focal-android-5.14.0-2
+    build:
+      dockerfile: docker/focal/test-android.Dockerfile
+      context: .
+      args:
+        QT_VERSION: 5.14.0
+
+  focal-android-515:
+    << : *linux
+    hostname: focal-android
+    image: ${DOCKER_USER:-qbsbuild}/qbsdev:focal-android-5.15.1-2
+    build:
+      dockerfile: docker/focal/test-android.Dockerfile
+      context: .
+      args:
+        QT_VERSION: 5.15.1
+
+  focal-android-600:
+    << : *linux
+    hostname: focal-android
+    image: ${DOCKER_USER:-qbsbuild}/qbsdev:focal-android-6.0.0-2
+    build:
+      dockerfile: docker/focal/test-android.Dockerfile
+      context: .
+      args:
+        QT_VERSION: 6.0.0
+
+  focal-baremetal:
+    << : *linux
+    hostname: focal-baremetal
+    image: ${DOCKER_USER:-qbsbuild}/qbsdev:focal-baremetal-4
+    build:
+      dockerfile: docker/focal/test-baremetal.Dockerfile
+      context: .
+
+  focal-qt4:
+    << : *linux
+    hostname: focal-qt4
+    image: ${DOCKER_USER:-qbsbuild}/qbsdev:focal-qt4-0
+    build:
+      dockerfile: docker/focal/test-qt4.Dockerfile
+      context: .
+
+  windows:
+    image: ${DOCKER_USER:-qbsbuild}/qbsdev:windowsservercore-5.15.0_1.18.2-0
+    build:
+      dockerfile: docker/windowsservercore/Dockerfile
+      context: .
+      args:
+        QT_VERSION: 5.15.0
+        QBS_VERSION: 1.18.2
+    working_dir: 'C:/qbs'
+    environment:
+      - BUILD_OPTIONS
+      - WITH_DOCS
+    volumes:
+      - type: bind
+        source: .
+        target: C:\qbs
+      - type: bind
+        source: ~/.ccache
+        target: C:\.ccache
+    network_mode: nat
