@@ -168,9 +168,9 @@ void NimCompilerBuildStep::setBuildType(BuildConfiguration::BuildType buildType)
     case BuildConfiguration::Release:
         m_defaultOptions = DefaultBuildOptions::Release;
         break;
-//    case BuildConfiguration::Debug:
-//        m_defaultOptions = DefaultBuildOptions::Debug;
-//        break;
+    case BuildConfiguration::Debug:
+        m_defaultOptions = DefaultBuildOptions::Debug;
+        break;
     default:
         m_defaultOptions = DefaultBuildOptions::Empty;
         break;

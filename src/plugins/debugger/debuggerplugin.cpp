@@ -2154,21 +2154,20 @@ void DebuggerPlugin::extensionsInitialized()
 
 static bool buildTypeAccepted(QFlags<ToolMode> toolMode, BuildConfiguration::BuildType buildType)
 {
-//    if (buildType == BuildConfiguration::Unknown)
-//        return true;
-//    if (buildType == BuildConfiguration::Debug && (toolMode & DebugMode))
-//        return true;
-//    if (buildType == BuildConfiguration::Release && (toolMode & ReleaseMode))
-//        return true;
-//    if (buildType == BuildConfiguration::Profile && (toolMode & ProfileMode))
-//        return true;
-//    return false;
-    return true;
+    if (buildType == BuildConfiguration::Unknown)
+        return true;
+    if (buildType == BuildConfiguration::Debug && (toolMode & DebugMode))
+        return true;
+    if (buildType == BuildConfiguration::Release && (toolMode & ReleaseMode))
+        return true;
+    if (buildType == BuildConfiguration::Profile && (toolMode & ProfileMode))
+        return true;
+    return false;
 }
 
 static BuildConfiguration::BuildType startupBuildType()
 {
-    BuildConfiguration::BuildType buildType = BuildConfiguration::Release;
+    BuildConfiguration::BuildType buildType = BuildConfiguration::Unknown;
     if (RunConfiguration *runConfig = SessionManager::startupRunConfiguration()) {
         if (const BuildConfiguration *buildConfig = runConfig->target()->activeBuildConfiguration())
             buildType = buildConfig->buildType();
@@ -2197,12 +2196,12 @@ bool wantRunTool(ToolMode toolMode, const QString &toolName)
     if (!buildTypeAccepted(toolMode, buildType)) {
         QString currentMode;
         switch (buildType) {
-//            case BuildConfiguration::Debug:
-//                currentMode = DebuggerPlugin::tr("Debug");
-//                break;
-//            case BuildConfiguration::Profile:
-//                currentMode = DebuggerPlugin::tr("Profile");
-//                break;
+            case BuildConfiguration::Debug:
+                currentMode = DebuggerPlugin::tr("Debug");
+                break;
+            case BuildConfiguration::Profile:
+                currentMode = DebuggerPlugin::tr("Profile");
+                break;
             case BuildConfiguration::Release:
                 currentMode = DebuggerPlugin::tr("Release");
                 break;

@@ -74,17 +74,17 @@ inline ProjectExplorer::BuildConfiguration::BuildType buildType(MesonBuildType t
 {
     switch (type) {
     case MesonBuildType::plain:
-//        return ProjectExplorer::BuildConfiguration::Unknown;
+        return ProjectExplorer::BuildConfiguration::Unknown;
     case MesonBuildType::debug:
-//        return ProjectExplorer::BuildConfiguration::Debug;
+        return ProjectExplorer::BuildConfiguration::Debug;
     case MesonBuildType::debugoptimized:
-//        return ProjectExplorer::BuildConfiguration::Profile;
+        return ProjectExplorer::BuildConfiguration::Profile;
     case MesonBuildType::release:
         return ProjectExplorer::BuildConfiguration::Release;
     case MesonBuildType::minsize:
         return ProjectExplorer::BuildConfiguration::Release;
     default:
-        return ProjectExplorer::BuildConfiguration::Release;
+        return ProjectExplorer::BuildConfiguration::Unknown;
     }
 }
 

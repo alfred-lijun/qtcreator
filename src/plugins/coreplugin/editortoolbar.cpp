@@ -158,7 +158,7 @@ EditorToolBar::EditorToolBar(QWidget *parent) :
             outline:none;\
         }";
 
-    const QString g_str5 = "QComboBox QAbstractItemView\
+    const QString g_str2 = "QComboBox QAbstractItemView\
         {\
             background: #FFFFFF;\
             border: 1px solid rgba(192,196,204,1);\
@@ -168,14 +168,14 @@ EditorToolBar::EditorToolBar(QWidget *parent) :
             outline:none;\
         }";
 
-    const QString g_str6 = "QComboBox QAbstractItemView::item{\
+    const QString g_str3 = "QComboBox QAbstractItemView::item{\
             height:25px;\
             background-color: rgb(255,255,255);\
             color: rgb(52,52,52);\
             outline:none;\
         }";
 
-    const QString g_str7 = "QComboBox QAbstractItemView::item:selected{\
+    const QString g_str4 = "QComboBox QAbstractItemView::item:selected{\
             background-color: rgba(0, 120,215,1);\
             color:rgb(255,255,255);\
             outline:none;\
@@ -183,7 +183,7 @@ EditorToolBar::EditorToolBar(QWidget *parent) :
 
     QStyledItemDelegate *delegate = new QStyledItemDelegate(this);
     d->m_editorList->setItemDelegate(delegate);
-    d->m_editorList->setStyleSheet(g_str1+g_str5+g_str6+g_str7);
+    d->m_editorList->setStyleSheet(g_str1+g_str2+g_str3+g_str4);
     QFont font;
     font.setPointSize(10);
     d->m_editorList->setFont(font);

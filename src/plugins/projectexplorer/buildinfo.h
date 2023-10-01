@@ -45,7 +45,7 @@ public:
     QString typeName;
     Utils::FilePath buildDirectory;
     Utils::Id kitId;
-    BuildConfiguration::BuildType buildType = BuildConfiguration::Release;
+    BuildConfiguration::BuildType buildType = BuildConfiguration::Unknown;
 
     QVariant extraInfo;
     const BuildConfigurationFactory *factory = nullptr;

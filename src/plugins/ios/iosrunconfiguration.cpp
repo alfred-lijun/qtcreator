@@ -176,14 +176,14 @@ FilePath IosRunConfiguration::bundleDirectory() const
         if (res.isEmpty())
             res = bc->buildDirectory();
         switch (bc->buildType()) {
-//        case BuildConfiguration::Debug :
-//        case BuildConfiguration::Unknown :
-//            if (isDevice)
-//                res = res / "Debug-iphoneos";
-//            else
-//                res = res.pathAppended("Debug-iphonesimulator");
-//            break;
-//        case BuildConfiguration::Profile :
+        case BuildConfiguration::Debug :
+        case BuildConfiguration::Unknown :
+            if (isDevice)
+                res = res / "Debug-iphoneos";
+            else
+                res = res.pathAppended("Debug-iphonesimulator");
+            break;
+        case BuildConfiguration::Profile :
         case BuildConfiguration::Release :
             if (isDevice)
                 res = res.pathAppended("Release-iphoneos");

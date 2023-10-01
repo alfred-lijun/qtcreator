@@ -87,8 +87,8 @@ QbsBuildConfiguration::QbsBuildConfiguration(Target *target, Utils::Id id)
         const Kit *kit = target->kit();
         QVariantMap configData = info.extraInfo.value<QVariantMap>();
         configData.insert(QLatin1String(Constants::QBS_CONFIG_VARIANT_KEY),
-                          (info.buildType == BuildConfiguration::Release)
-                          ? QLatin1String(Constants::QBS_VARIANT_RELEASE)
+                          (info.buildType == BuildConfiguration::Debug)
+                          ? QLatin1String(Constants::QBS_VARIANT_DEBUG)
                           : QLatin1String(Constants::QBS_VARIANT_RELEASE));
 
         FilePath buildDir = info.buildDirectory;
@@ -228,10 +228,10 @@ BuildConfiguration::BuildType QbsBuildConfiguration::buildType() const
         variant = qbsStep()->buildVariant();
 
     if (variant == QLatin1String(Constants::QBS_VARIANT_DEBUG))
-        return Release;
+        return Debug;
     if (variant == QLatin1String(Constants::QBS_VARIANT_RELEASE))
         return Release;
-    return Release;
+    return Unknown;
 }
 
 void QbsBuildConfiguration::setChangedFiles(const QStringList &files)
@@ -349,7 +349,7 @@ QbsBuildConfigurationFactory::QbsBuildConfigurationFactory()
         QList<BuildInfo> result;
 
         if (forSetup) {
-            BuildInfo info = createBuildInfo(BuildConfiguration::Release);
+            BuildInfo info = createBuildInfo(BuildConfiguration::Debug);
             //: The name of the debug build configuration created by default for a qbs project.
             info.displayName = BuildConfiguration::tr("Debug");
             //: Non-ASCII characters in directory suffix may cause build issues.
@@ -365,7 +365,7 @@ QbsBuildConfigurationFactory::QbsBuildConfigurationFactory()
             info.buildDirectory = defaultBuildDirectory(projectPath, k, rel, info.buildType);
             result << info;
         } else {
-//            result << createBuildInfo(BuildConfiguration::Debug);
+            result << createBuildInfo(BuildConfiguration::Debug);
             result << createBuildInfo(BuildConfiguration::Release);
         }
 
@@ -377,10 +377,10 @@ BuildInfo QbsBuildConfigurationFactory::createBuildInfo(BuildConfiguration::Buil
 {
     BuildInfo info;
     info.buildType = type;
-    info.typeName = type == BuildConfiguration::Release
-            ? BuildConfiguration::tr("Release") : BuildConfiguration::tr("Release");
+    info.typeName = type == BuildConfiguration::Debug
+            ? BuildConfiguration::tr("Debug") : BuildConfiguration::tr("Release");
     QVariantMap config;
-    config.insert("configName", type == BuildConfiguration::Release ? "Release" : "Release");
+    config.insert("configName", type == BuildConfiguration::Debug ? "Debug" : "Release");
     info.extraInfo = config;
     return info;
 }

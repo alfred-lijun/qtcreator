@@ -90,7 +90,7 @@ static FilePath buildDir(const FilePath &projectFilePath, const Kit *k)
 {
     const QString projectName = projectFilePath.completeBaseName();
     ProjectMacroExpander expander(projectFilePath, projectName, k, QString(),
-                                  BuildConfiguration::Release);
+                                  BuildConfiguration::Unknown);
     const FilePath projectDir = Project::projectDirectory(projectFilePath);
     const QString buildPath = expander.expand(ProjectExplorerPlugin::buildDirectoryTemplate());
     return projectDir.resolvePath(buildPath);
@@ -224,7 +224,7 @@ const QList<BuildInfo> QbsProjectImporter::buildInfoList(void *directoryData) co
     BuildInfo info;
     info.displayName = bgData->bgFilePath.completeBaseName();
     info.buildType = bgData->buildVariant == "debug"
-            ? BuildConfiguration::Release : BuildConfiguration::Release;
+            ? BuildConfiguration::Debug : BuildConfiguration::Release;
     info.buildDirectory = bgData->bgFilePath.parentDir().parentDir();
     QVariantMap config = bgData->overriddenProperties;
     config.insert("configName", info.displayName);

@@ -258,7 +258,7 @@ BuildConfiguration::BuildType BuildStep::buildType() const
 {
     if (auto bc = buildConfiguration())
         return bc->buildType();
-    return BuildConfiguration::Release;
+    return BuildConfiguration::Unknown;
 }
 
 Utils::MacroExpander *BuildStep::macroExpander() const

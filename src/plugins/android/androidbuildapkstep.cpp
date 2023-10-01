@@ -615,8 +615,8 @@ bool AndroidBuildApkStep::init()
     // Must be the last option, otherwise androiddeployqt might use the other
     // params (e.g. --sign) to choose not to add gdbserver
     if (version->qtVersion() >= QtSupport::QtVersionNumber(5, 6, 0)) {
-        if (m_addDebugger || buildType() == ProjectExplorer::BuildConfiguration::Release)
-            arguments << "--no-gdbserver";
+        if (m_addDebugger || buildType() == ProjectExplorer::BuildConfiguration::Debug)
+            arguments << "--gdbserver";
         else
             arguments << "--no-gdbserver";
     }

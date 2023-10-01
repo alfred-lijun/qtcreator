@@ -99,9 +99,9 @@ public:
     virtual void restrictNextBuild(const RunConfiguration *rc);
 
     enum BuildType {
-//        Unknown,
-//        Debug,
-//        Profile,
+        Unknown,
+        Debug,
+        Profile,
         Release
     };
     virtual BuildType buildType() const;

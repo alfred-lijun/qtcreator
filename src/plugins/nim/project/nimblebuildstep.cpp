@@ -92,8 +92,8 @@ void NimbleBuildStep::setupOutputFormatter(OutputFormatter *formatter)
 
 QString NimbleBuildStep::defaultArguments() const
 {
-//    if (buildType() == BuildConfiguration::Debug)
-//        return {"--debugger:native"};
+    if (buildType() == BuildConfiguration::Debug)
+        return {"--debugger:native"};
     return {};
 }
 

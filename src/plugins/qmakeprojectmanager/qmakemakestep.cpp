@@ -127,8 +127,8 @@ bool QmakeMakeStep::init()
         // for file builds, since the rules for that are
         // only in those files.
         if (subProFile->isDebugAndRelease() && bc->fileNodeBuild()) {
-            if (buildType() == QmakeBuildConfiguration::Release)
-                makefile += ".Release";
+            if (buildType() == QmakeBuildConfiguration::Debug)
+                makefile += ".Debug";
             else
                 makefile += ".Release";
         }
@@ -154,8 +154,8 @@ bool QmakeMakeStep::init()
         if (objectsDir.isEmpty()) {
             objectsDir = bc->qmakeBuildSystem()->buildDir(subProFile->filePath()).toString();
             if (subProFile->isDebugAndRelease()) {
-                if (bc->buildType() == QmakeBuildConfiguration::Release)
-                    objectsDir += "/release";
+                if (bc->buildType() == QmakeBuildConfiguration::Debug)
+                    objectsDir += "/debug";
                 else
                     objectsDir += "/release";
             }

@@ -221,15 +221,15 @@ QStringList IosBuildStep::defaultArguments() const
     Kit *kit = target()->kit();
     ToolChain *tc = ToolChainKitAspect::cxxToolChain(kit);
     switch (buildConfiguration()->buildType()) {
-//    case BuildConfiguration::Debug :
-//        res << "-configuration" << "Debug";
-//        break;
+    case BuildConfiguration::Debug :
+        res << "-configuration" << "Debug";
+        break;
     case BuildConfiguration::Release :
-//    case BuildConfiguration::Profile :
+    case BuildConfiguration::Profile :
         res << "-configuration" << "Release";
         break;
-//    case BuildConfiguration::Unknown :
-//        break;
+    case BuildConfiguration::Unknown :
+        break;
     default:
         qCWarning(iosLog) << "IosBuildStep had an unknown buildType " << buildType();
     }

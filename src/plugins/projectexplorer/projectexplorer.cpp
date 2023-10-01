@@ -1891,7 +1891,7 @@ bool ProjectExplorerPlugin::initialize(const QStringList &arguments, QString *er
         []() -> QString {
             const BuildConfiguration * const bc = activeBuildConfiguration();
             const BuildConfiguration::BuildType type = bc
-                    ? bc->buildType() : BuildConfiguration::Release;
+                    ? bc->buildType() : BuildConfiguration::Unknown;
             return BuildConfiguration::buildTypeName(type);
     });
     expander->registerVariable("ActiveProject:BuildConfig:Path",

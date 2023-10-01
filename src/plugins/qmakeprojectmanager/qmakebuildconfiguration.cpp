@@ -134,8 +134,8 @@ QmakeBuildConfiguration::QmakeBuildConfiguration(Target *target, Utils::Id id)
         BaseQtVersion *version = QtKitAspect::qtVersion(target->kit());
 
         BaseQtVersion::QmakeBuildConfigs config = version->defaultBuildConfig();
-        if (info.buildType == BuildConfiguration::Release)
-            config &= ~BaseQtVersion::DebugBuild;
+        if (info.buildType == BuildConfiguration::Debug)
+            config |= BaseQtVersion::DebugBuild;
         else
             config &= ~BaseQtVersion::DebugBuild;
 
@@ -730,24 +730,24 @@ static BuildInfo createBuildInfo(const Kit *k, const FilePath &projectPath,
                 extraInfo.config.useQtQuickCompiler = TriState::Enabled;
         }
     } else {
-//        if (type == BuildConfiguration::Debug) {
-//            //: The name of the debug build configuration created by default for a qmake project.
-//            info.displayName = BuildConfiguration::tr("Debug");
-//            //: Non-ASCII characters in directory suffix may cause build issues.
-//            suffix = QmakeBuildConfiguration::tr("Debug", "Shadow build directory suffix");
-//        } else if (type == BuildConfiguration::Profile) {
-//            //: The name of the profile build configuration created by default for a qmake project.
-//            info.displayName = BuildConfiguration::tr("Profile");
-//            //: Non-ASCII characters in directory suffix may cause build issues.
-//            suffix = QmakeBuildConfiguration::tr("Profile", "Shadow build directory suffix");
-//            if (settings.separateDebugInfo.value() == TriState::Default)
-//                extraInfo.config.separateDebugInfo = TriState::Enabled;
+        if (type == BuildConfiguration::Debug) {
+            //: The name of the debug build configuration created by default for a qmake project.
+            info.displayName = BuildConfiguration::tr("Debug");
+            //: Non-ASCII characters in directory suffix may cause build issues.
+            suffix = QmakeBuildConfiguration::tr("Debug", "Shadow build directory suffix");
+        } else if (type == BuildConfiguration::Profile) {
+            //: The name of the profile build configuration created by default for a qmake project.
+            info.displayName = BuildConfiguration::tr("Profile");
+            //: Non-ASCII characters in directory suffix may cause build issues.
+            suffix = QmakeBuildConfiguration::tr("Profile", "Shadow build directory suffix");
+            if (settings.separateDebugInfo.value() == TriState::Default)
+                extraInfo.config.separateDebugInfo = TriState::Enabled;
 
-//            if (settings.qtQuickCompiler.value() == TriState::Default) {
-//                if (version && version->isQtQuickCompilerSupported())
-//                    extraInfo.config.useQtQuickCompiler = TriState::Enabled;
-//            }
-//        }
+            if (settings.qtQuickCompiler.value() == TriState::Default) {
+                if (version && version->isQtQuickCompilerSupported())
+                    extraInfo.config.useQtQuickCompiler = TriState::Enabled;
+            }
+        }
         if (settings.qmlDebugging.value() == TriState::Default) {
             if (version && version->isQmlDebuggingSupported())
                 extraInfo.config.linkQmlDebuggingQQ2 = TriState::Enabled;
@@ -811,7 +811,7 @@ QmakeBuildConfigurationFactory::QmakeBuildConfigurationFactory()
             result << info;
         };
 
-//        addBuild(BuildConfiguration::Debug);
+//        addBuild(BuildConfiguration::Release);
         addBuild(BuildConfiguration::Release);
 //        if (qtVersion && qtVersion->qtVersion().majorVersion > 4)
 //            addBuild(BuildConfiguration::Profile);
@@ -823,9 +823,9 @@ QmakeBuildConfigurationFactory::QmakeBuildConfigurationFactory()
 BuildConfiguration::BuildType QmakeBuildConfiguration::buildType() const
 {
     if (qmakeBuildConfiguration() & BaseQtVersion::DebugBuild)
-        return Release;
+        return Debug;
     if (separateDebugInfo() == TriState::Enabled)
-        return Release;
+        return Profile;
     return Release;
 }
 

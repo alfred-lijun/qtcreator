@@ -124,7 +124,7 @@ QStringList CMakeProjectImporter::importCandidates()
 
     foreach (Kit *k, KitManager::kits()) {
         QFileInfo fi(CMakeBuildConfiguration::shadowBuildDirectory(projectFilePath(), k,
-                                                                   QString(), BuildConfiguration::Release).toString());
+                                                                   QString(), BuildConfiguration::Unknown).toString());
         candidates << scanDirectory(fi.absolutePath(), QString());
     }
     const QStringList finalists = Utils::filteredUnique(candidates);

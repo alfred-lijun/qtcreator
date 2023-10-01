@@ -1036,13 +1036,13 @@ bool CMakeBuildConfiguration::fromMap(const QVariantMap &map)
     // TODO: Upgrade from Qt Creator < 4.13: Remove when no longer supported!
     const QString buildTypeName = [this]() {
         switch (buildType()) {
-//        case Debug:
-//            return QString("Debug");
-//        case Profile:
-//            return QString("RelWithDebInfo");
+        case Debug:
+            return QString("Debug");
+        case Profile:
+            return QString("RelWithDebInfo");
         case Release:
             return QString("Release");
-//        case Unknown:
+        case Unknown:
         default:
             return QString("");
         }
@@ -1251,11 +1251,11 @@ BuildConfiguration::BuildType CMakeBuildConfigurationFactory::cmakeBuildTypeToBu
     if (in == BuildTypeRelease || in == BuildTypeMinSizeRel)
         return BuildConfiguration::Release;
     else if (in == BuildTypeDebug)
-        return BuildConfiguration::Release;
+        return BuildConfiguration::Debug;
     else if (in == BuildTypeRelWithDebInfo)
-        return BuildConfiguration::Release;
+        return BuildConfiguration::Profile;
     else
-        return BuildConfiguration::Release;
+        return BuildConfiguration::Unknown;
 }
 
 BuildInfo CMakeBuildConfigurationFactory::createBuildInfo(BuildType buildType)
@@ -1264,7 +1264,15 @@ BuildInfo CMakeBuildConfigurationFactory::createBuildInfo(BuildType buildType)
 
     switch (buildType) {
     case BuildTypeNone:
+        info.typeName = "Build";
+        info.displayName = BuildConfiguration::tr("Build");
+        info.buildType = BuildConfiguration::Unknown;
+        break;
     case BuildTypeDebug:
+        info.typeName = "Debug";
+        info.displayName = BuildConfiguration::tr("Debug");
+        info.buildType = BuildConfiguration::Debug;
+        break;
     case BuildTypeRelease:
         info.typeName = "Release";
         info.displayName = BuildConfiguration::tr("Release");
@@ -1278,7 +1286,7 @@ BuildInfo CMakeBuildConfigurationFactory::createBuildInfo(BuildType buildType)
     case BuildTypeRelWithDebInfo:
         info.typeName = "RelWithDebInfo";
         info.displayName = CMakeBuildConfiguration::tr("Release with Debug Information");
-        info.buildType = BuildConfiguration::Release;
+        info.buildType = BuildConfiguration::Profile;
         break;
     default:
         QTC_CHECK(false);

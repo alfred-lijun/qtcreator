@@ -155,7 +155,7 @@ public:
     QList<Utils::Id> m_customParsers;
 
     // FIXME: Remove.
-    BuildConfiguration::BuildType m_initialBuildType = BuildConfiguration::Release;
+    BuildConfiguration::BuildType m_initialBuildType = BuildConfiguration::Unknown;
     std::function<void(const BuildInfo &)> m_initializer;
 };
 
@@ -567,13 +567,13 @@ BuildConfiguration::BuildType BuildConfiguration::buildType() const
 QString BuildConfiguration::buildTypeName(BuildConfiguration::BuildType type)
 {
     switch (type) {
-//    case ProjectExplorer::BuildConfiguration::Debug:
-//        return QLatin1String("debug");
-//    case ProjectExplorer::BuildConfiguration::Profile:
-//        return QLatin1String("profile");
+    case ProjectExplorer::BuildConfiguration::Debug:
+        return QLatin1String("debug");
+    case ProjectExplorer::BuildConfiguration::Profile:
+        return QLatin1String("profile");
     case ProjectExplorer::BuildConfiguration::Release:
         return QLatin1String("release");
-//    case ProjectExplorer::BuildConfiguration::Unknown: // fallthrough
+    case ProjectExplorer::BuildConfiguration::Unknown: // fallthrough
     default:
         return QLatin1String("unknown");
     }

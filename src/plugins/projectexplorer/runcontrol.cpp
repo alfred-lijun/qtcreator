@@ -355,7 +355,7 @@ public:
     QMap<Utils::Id, QVariantMap> settingsData;
     Utils::Id runConfigId;
     BuildTargetInfo buildTargetInfo;
-    BuildConfiguration::BuildType buildType = BuildConfiguration::Release;
+    BuildConfiguration::BuildType buildType = BuildConfiguration::Unknown;
     FilePath buildDirectory;
     Environment buildEnvironment;
     Kit *kit = nullptr; // Not owned.

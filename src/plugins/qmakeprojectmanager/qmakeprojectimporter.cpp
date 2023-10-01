@@ -96,7 +96,7 @@ QStringList QmakeProjectImporter::importCandidates()
 
     foreach (Kit *k, KitManager::kits()) {
         const FilePath sbdir = QmakeBuildConfiguration::shadowBuildDirectory
-                    (projectFilePath(), k, QString(), BuildConfiguration::Release);
+                    (projectFilePath(), k, QString(), BuildConfiguration::Unknown);
 
         const QString baseDir = sbdir.toFileInfo().absolutePath();
 
@@ -220,8 +220,8 @@ const QList<BuildInfo> QmakeProjectImporter::buildInfoList(void *directoryData) 
     // create info:
     BuildInfo info;
     if (data->buildConfig & BaseQtVersion::DebugBuild) {
-        info.buildType = BuildConfiguration::Release;
-        info.displayName = QCoreApplication::translate("QmakeProjectManager::Internal::QmakeProjectImporter", "Release");
+        info.buildType = BuildConfiguration::Debug;
+        info.displayName = QCoreApplication::translate("QmakeProjectManager::Internal::QmakeProjectImporter", "Debug");
     } else {
         info.buildType = BuildConfiguration::Release;
         info.displayName = QCoreApplication::translate("QmakeProjectManager::Internal::QmakeProjectImporter", "Release");
